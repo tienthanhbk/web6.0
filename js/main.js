@@ -44,7 +44,7 @@ var update = function(){
       Nakama.player.position.y -= 10;
     }
     else {
-      Nakama.player.position.y += 1;
+      Nakama.player.position.y += 0.5;
     }
   }
 
@@ -53,7 +53,7 @@ var update = function(){
       Nakama.player.position.y += 10;
     }
     else {
-      Nakama.player.position.y -= 1;
+      Nakama.player.position.y -= 0.5;
     }
   }
 
@@ -62,7 +62,7 @@ var update = function(){
       Nakama.player.position.x -= 10;
     }
     else {
-      Nakama.player.position.x += 1;
+      Nakama.player.position.x += 0.5;
     }
   }
 
@@ -71,7 +71,7 @@ var update = function(){
       Nakama.player.position.x += 10;
     }
     else {
-      Nakama.player.position.x -= 1;
+      Nakama.player.position.x -= 0.5;
     }
   }
 
