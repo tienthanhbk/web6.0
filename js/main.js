@@ -85,7 +85,7 @@ var create = function(){
     new EnemyShipController(
       Nakama.configs.ENEMY1_POS.x,
       Nakama.configs.ENEMY1_POS.y,
-      "EnemyType2.png"
+      "EnemyType1.png"
     )
   );
 }

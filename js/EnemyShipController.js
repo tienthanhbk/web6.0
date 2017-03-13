@@ -8,12 +8,12 @@ class EnemyShipController {
   update() {
     //move by x-side
     if(this.sprite.body.velocity.x > 0){  //if is moving right
-      if(this.sprite.position.x > 550) {
+      if(this.sprite.position.x > EnemyShipController.RIGHT_LINE) {
         this.sprite.body.velocity.x = -EnemyShipController.SHIP_SPEED; //if cross the right line, move left
       }
     }
-    else if(this.sprite.body.velocity.x < 0){ //if is moving left
-      if(this.sprite.position.x < 40) {
+    else if(this.sprite.body.velocity.x < 0){ //else if is moving left
+      if(this.sprite.position.x < EnemyShipController.LEFT_LINE) {
         this.sprite.body.velocity.x = EnemyShipController.SHIP_SPEED; //if cross the left line, move right
       }
     }
@@ -23,12 +23,12 @@ class EnemyShipController {
 
     //move by y-side
     if(this.sprite.body.velocity.y > 0){  //if is moving down
-      if(this.sprite.position.y > 400) {
+      if(this.sprite.position.y > EnemyShipController.LOWER_LINE) {
         this.sprite.body.velocity.y = -EnemyShipController.SHIP_SPEED; //if cross the lower line, move up
       }
     }
-    else if(this.sprite.body.velocity.y < 0){ //if is moving up
-      if(this.sprite.position.y < 40) {
+    else if(this.sprite.body.velocity.y < 0){ //else if is moving up
+      if(this.sprite.position.y < EnemyShipController.UPPER_LINE) {
         this.sprite.body.velocity.y = EnemyShipController.SHIP_SPEED; //if cross the upper line, move down
       }
     }
@@ -40,3 +40,7 @@ class EnemyShipController {
 }
 
 EnemyShipController.SHIP_SPEED = 200;
+EnemyShipController.LEFT_LINE = 40;
+EnemyShipController.RIGHT_LINE = 550;
+EnemyShipController.UPPER_LINE = 40;
+EnemyShipController.LOWER_LINE = 400;
