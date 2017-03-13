@@ -8,10 +8,14 @@ Nakama.configs = {
   MAX_HEIGHT  : 960,
   PLAYER1_POS : {
     x : 200,
-    y : 200
+    y : 600
   },
   PLAYER2_POS : {
     x : 400,
+    y : 600
+  },
+  ENEMY1_POS    : {
+    x : 200,
     y : 200
   }
 };
@@ -49,6 +53,7 @@ var create = function(){
 
   Nakama.game.add.sprite(0, 0, 'background');
   Nakama.players = [];
+  Nakama.enemies = [];
   Nakama.players.push(
     new ShipController(
       Nakama.configs.PLAYER1_POS.x,
@@ -75,6 +80,14 @@ var create = function(){
       }
     )
   );
+
+  Nakama.enemies.push(
+    new EnemyShipController(
+      Nakama.configs.ENEMY1_POS.x,
+      Nakama.configs.ENEMY1_POS.y,
+      "EnemyType2.png"
+    )
+  );
 }
 
 // update game state each frame
@@ -83,6 +96,9 @@ var update = function(){
     ship.update();
   });
 
+  Nakama.enemies.forEach(function(ship){
+    ship.update();
+  });
 }
 
 // before camera render (mostly for debug)
