@@ -1,8 +1,10 @@
 class EnemyShipController {
-  constructor(x, y, spriteName) {
-    this.sprite = Nakama.game.add.sprite(x, y, 'assets', spriteName);
+  constructor(x, y, spriteName, configs) {
+    this.sprite = Nakama.enemyGroup.create(x, y, 'assets', spriteName);
     Nakama.game.physics.arcade.enable(this.sprite);
     this.sprite.body.collideWorldBounds = true;
+    this.configs = configs;
+    this.sprite.health = this.configs.health;
   }
 
   update() {
