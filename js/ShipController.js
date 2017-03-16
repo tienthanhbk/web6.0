@@ -5,6 +5,7 @@ class ShipController {
     this.sprite.body.collideWorldBounds = true;
     this.configs = configs;
     this.timeSinceLastFire = 0;
+    this.timeSinceLastFireRunBullet = 0;
     this.sprite.anchor = new Phaser.Point(0.5, 0.5);
   }
 
@@ -30,6 +31,7 @@ class ShipController {
     }
 
     this.timeSinceLastFire += Nakama.game.time.physicsElapsed;
+    this.timeSinceLastFireRunBullet += Nakama.game.time.physicsElapsed;
 
     if(Nakama.keyboard.isDown(this.configs.fire)){
       this.tryFire();
@@ -41,6 +43,11 @@ class ShipController {
       this.fire();
       this.timeSinceLastFire = 0;
     }
+
+    if(this.timeSinceLastFireRunBullet >= 5*this.configs.bulletCollDown){
+      this.fireRunningBullet();
+      this.timeSinceLastFireRunBullet = 0;
+    }
   }
 
   fire() {
@@ -51,12 +58,25 @@ class ShipController {
     this.createBullet(new Phaser.Point(-1, -2));
   }
 
+  fireRunningBullet() {
+    this.createRunningBullet(new Phaser.Point(0, -1));
+
+  }
+
   createBullet(direction){
     new BulletController (
       this.sprite.position,
       direction,
       "BulletType1.png"
     );
+  }
+
+  createRunningBullet(direction) {
+    new RunningBulletController (
+      this.sprite.position,
+      direction,
+      "BulletType2.png"
+    )
   }
 
 }

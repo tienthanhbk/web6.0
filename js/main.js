@@ -53,11 +53,13 @@ var create = function(){
   Nakama.game.add.sprite(0, 0, 'background');
 
   Nakama.bulletGroup = Nakama.game.add.physicsGroup();
+  Nakama.runningBulletGroup = Nakama.game.add.physicsGroup();
   Nakama.playerGroup = Nakama.game.add.physicsGroup();
   Nakama.enemyGroup = Nakama.game.add.physicsGroup();
 
   Nakama.players = [];
   Nakama.enemies = [];
+
   Nakama.players.push(
     new ShipController(
       Nakama.configs.PLAYER1_POS.x,
@@ -97,6 +99,7 @@ var create = function(){
       }
     )
   );
+
 }
 
 // update game state each frame
@@ -114,12 +117,27 @@ var update = function(){
     Nakama.enemyGroup,
     onBulletHitEnemy
   );
+
+  Nakama.game.physics.arcade.overlap(
+    Nakama.runningBulletGroup,
+    Nakama.enemyGroup,
+    onRunningBulletHitEnemy
+  )
 }
 
 var onBulletHitEnemy = function(bulletSprite, enemySprite){
   enemySprite.damage(1);
   bulletSprite.kill();
+  console.log("enemy health -1");
 }
+
+var onRunningBulletHitEnemy = function(bulletSprite, enemySprite){
+  enemySprite.damage(10);
+  bulletSprite.kill();
+  console.log("enemy health -10");
+}
+
+
 
 // before camera render (mostly for debug)
 var render = function(){}
