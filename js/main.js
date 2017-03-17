@@ -59,6 +59,7 @@ var create = function(){
 
   Nakama.players = [];
   Nakama.enemies = [];
+  Nakama.runningBullets = [];
 
   Nakama.players.push(
     new ShipController(
@@ -95,21 +96,43 @@ var create = function(){
       Nakama.configs.ENEMY1_POS.y,
       "EnemyType3.png",
       {
+        health : 200
+      }
+    ),
+    new EnemyShipController(
+      Nakama.configs.ENEMY1_POS.x + 50,
+      Nakama.configs.ENEMY1_POS.y - 50,
+      "EnemyType2.png",
+      {
         health : 150
       }
     )
   );
 
+  Nakama.enemyGroup.getFirstAlive = function() {
+    shipReturn = null;
+    Nakama.enemies.forEach(function(ship){
+      if(ship.sprite._exists == true ){
+        shipReturn = ship.sprite;
+      }
+    });
+    return shipReturn;
+  }
 }
 
 // update game state each frame
 var update = function(){
+  Nakama.enemyGroup.getFirstAlive();
+
   Nakama.players.forEach(function(ship){
     ship.update();
   });
 
   Nakama.enemies.forEach(function(ship){
     ship.update();
+  });
+  Nakama.runningBullets.forEach(function(runningBullet){
+    runningBullet.update();
   });
 
   Nakama.game.physics.arcade.overlap(
@@ -128,13 +151,12 @@ var update = function(){
 var onBulletHitEnemy = function(bulletSprite, enemySprite){
   enemySprite.damage(1);
   bulletSprite.kill();
-  console.log("enemy health -1");
 }
 
 var onRunningBulletHitEnemy = function(bulletSprite, enemySprite){
   enemySprite.damage(10);
   bulletSprite.kill();
-  console.log("enemy health -10");
+  console.log("hit");
 }
 
 
