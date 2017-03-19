@@ -58,17 +58,17 @@ var create = function(){
 
   Nakama.players = [];
   Nakama.players.push(
-    new ShipController(
+    new ShipType1Controller(
       Nakama.configs.PLAYER1_POS.x,
       Nakama.configs.PLAYER1_POS.y,
-      "Spaceship1-Player.png",
       {
         up      : Phaser.Keyboard.UP,
         down    : Phaser.Keyboard.DOWN,
         left    : Phaser.Keyboard.LEFT,
         right   : Phaser.Keyboard.RIGHT,
         fire    : Phaser.Keyboard.SPACEBAR,
-        cooldown: 0.1
+        cooldown: 0.1,
+        speed   : 600
       }
     )
   );
@@ -84,7 +84,8 @@ var create = function(){
         left  : Phaser.Keyboard.A,
         right : Phaser.Keyboard.D,
         fire  : Phaser.Keyboard.F,
-        cooldown: 0.1
+        cooldown: 0.5,
+        speed   : 400
       }
     )
   );
