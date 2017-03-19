@@ -71,5 +71,5 @@ class RunningBulletController {
   }
 
 }
-RunningBulletController.BULLET_SPEED = 300.0;
-RunningBulletController.ANGULAR_VELOCITY = 60.0;
+RunningBulletController.BULLET_SPEED = 900.0;
+RunningBulletController.ANGULAR_VELOCITY = 90.0;

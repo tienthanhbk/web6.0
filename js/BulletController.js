@@ -10,8 +10,11 @@ class BulletController {
     );
     //Đạn ra khỏi WorldBounds thì kill
     this.sprite.body.checkWorldBounds = true;
-    this.sprite.body.outOfBoundsKill = true;
+    this.sprite.outOfBoundsKill = true;
 
+  }
+
+  onKilled(){
   }
 
 }

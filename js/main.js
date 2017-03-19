@@ -131,6 +131,7 @@ var update = function(){
   Nakama.enemies.forEach(function(ship){
     ship.update();
   });
+  
   Nakama.runningBullets.forEach(function(runningBullet){
     runningBullet.update();
   });
