@@ -1,12 +1,13 @@
 class ShipController {
-  constructor(x, y, spriteName, configs) {
+  static get SHIP_SPEED(){ return 400; }
+
+  constructor(x, y, spriteName, configs){
     this.sprite = Nakama.playerGroup.create(x, y, 'assets', spriteName);
-    Nakama.game.physics.arcade.enable(this.sprite);
+
+    this.sprite.anchor = new Phaser.Point(0.5,0.5);
     this.sprite.body.collideWorldBounds = true;
     this.configs = configs;
     this.timeSinceLastFire = 0;
-    this.timeSinceLastFireRunBullet = 0;
-    this.sprite.anchor = new Phaser.Point(0.5, 0.5);
   }
 
   update(){
@@ -31,26 +32,19 @@ class ShipController {
     }
 
     this.timeSinceLastFire += Nakama.game.time.physicsElapsed;
-    this.timeSinceLastFireRunBullet += Nakama.game.time.physicsElapsed;
-
     if(Nakama.keyboard.isDown(this.configs.fire)){
       this.tryFire();
     }
   }
 
-  tryFire() {
-    if(this.timeSinceLastFire >= this.configs.bulletCollDown){
+  tryFire(){
+    if(this.timeSinceLastFire >= this.configs.cooldown){
       this.fire();
       this.timeSinceLastFire = 0;
     }
-
-    if(this.timeSinceLastFireRunBullet >= 5*this.configs.bulletCollDown){
-      this.fireRunningBullet();
-      this.timeSinceLastFireRunBullet = 0;
-    }
   }
 
-  fire() {
+  fire(){
     this.createBullet(new Phaser.Point(0, -1));
     this.createBullet(new Phaser.Point(1, -5));
     this.createBullet(new Phaser.Point(-1, -5));
@@ -58,28 +52,10 @@ class ShipController {
     this.createBullet(new Phaser.Point(-1, -2));
   }
 
-  fireRunningBullet() {
-    this.createRunningBullet(new Phaser.Point(0, -1));
-    this.createRunningBullet(new Phaser.Point(1, -3));
-    this.createRunningBullet(new Phaser.Point(-1, -3));
-
-  }
-
   createBullet(direction){
-    new BulletType1Controller (
+    new BulletType2Controller(
       this.sprite.position,
       direction
-    );
-  }
-
-  createRunningBullet(direction) {
-    new RunningBulletController (
-      this.sprite.position,
-      direction,
-      "BulletType2.png"
     )
   }
-
 }
-
-ShipController.SHIP_SPEED = 400;
